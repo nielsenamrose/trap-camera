@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 from datetime import datetime
 import time
+import os
 
 cap = cv2.VideoCapture(0)
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
@@ -16,6 +17,7 @@ f = 1;
 min_moment = 50000
 started = False
 buffered_frames = []
+path = ""
 
 while(1):
     ok, frame = cap.read()
@@ -41,9 +43,9 @@ while(1):
 
         if moment > min_moment:
             if d >= 50 and not started:
-                path = './video/{}.avi'.format(now.strftime("%Y-%m-%d_%H-%M-%S"))
+                path = './video/{}'.format(now.strftime("%Y-%m-%d_%H-%M-%S"))
                 print('start writing video file:', path)
-                out = cv2.VideoWriter(path, fourcc, 20.0, (640,  480))
+                out = cv2.VideoWriter(path+'.avi', fourcc, 20.0, (640,  480))
                 for f in buffered_frames:
                     out.write(f)
                 started = True
@@ -56,6 +58,7 @@ while(1):
             if d <= -50 and started:
                 print('stop')
                 out.release()
+                os.rename(path+'.avi', path+'full.avi')
                 started = False
             d = max(d - 3, -100)
             buffered_frames = []
@@ -81,5 +84,6 @@ while(1):
 
 if started:
     out.release()    
+    os.rename(path+'.avi', path+'full.avi')
 cap.release()
 cv2.destroyAllWindows()
