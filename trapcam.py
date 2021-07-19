@@ -40,7 +40,7 @@ while(1):
 
         print("{} {}".format(d, moment))
 
-        cv2.putText(frame, f'{now}', (0, 470), cv2.FONT_HERSHEY_SIMPLEX,
+        cv2.putText(frame, "".format(now), (0, 470), cv2.FONT_HERSHEY_SIMPLEX,
                     0.5, (255, 255, 255), 1, cv2.LINE_AA)
 
         if moment > min_moment:
