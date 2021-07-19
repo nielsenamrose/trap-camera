@@ -47,7 +47,7 @@ while(1):
             if d >= 50 and not started:
                 path = './video/{}'.format(now.strftime("%Y-%m-%d_%H-%M-%S"))
                 print('start writing video file:', path)
-                out = cv2.VideoWriter(path+'.avi', fourcc, 20.0, (640,  480))
+                out = cv2.VideoWriter(path+'.avi', fourcc, 10.0, (640,  480))
                 for f in buffered_frames:
                     out.write(f)
                 started = True
@@ -82,7 +82,7 @@ while(1):
         print("Failded to capture frame")
         break
 
-    time.sleep(0.05)
+    time.sleep(0.1)
 
 if started:
     out.release()
