@@ -70,14 +70,14 @@ while(1):
 
         if started:
             out.write(frame)
-            cv2.imshow('capture', frame)
+            #cv2.imshow('capture', frame)
 
         reference_frame = frame
         reference_blur = blur
 
-        k = cv2.waitKey(1) & 0xFF
-        if k == 13:
-            break
+        #k = cv2.waitKey(1) & 0xFF
+        # if k == 13:
+        #    break
     else:
         print("Failded to capture frame")
         break
@@ -88,4 +88,4 @@ if started:
     out.release()
     os.rename(path+'.avi', path+'full.avi')
 cap.release()
-cv2.destroyAllWindows()
+# cv2.destroyAllWindows()
