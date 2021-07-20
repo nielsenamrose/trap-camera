@@ -26,7 +26,7 @@ def open_and_transfer_file(filename):
                       
 while(True):
     try:
-        files = glob.glob("/tmp/trapcam/*.avi")
+        files = glob.glob("/tmp/*.avi")
         for filename in files:
             if filename.find("part") == -1:
                 if open_and_transfer_file(filename):
