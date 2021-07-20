@@ -32,6 +32,6 @@ while(True):
                 if open_and_transfer_file(filename):
                     print("File transferred:", filename)
                     os.remove(filename)
-        time.sleep(5)
     except Exception as ex:
         print("Error:", ex)
+    time.sleep(5)
