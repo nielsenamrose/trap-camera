@@ -35,6 +35,7 @@ def start_recording(now, buffered_frames):
 def stop_recording(out):
     print('stop recording')
     out.release()
+    rename_part_files()
 
 def capture(cap):
     d = 0
@@ -71,7 +72,6 @@ def capture(cap):
                             stop_recording(out)
                             out = None
                             started = False
-                            rename_part_files()
                         d = max(d - 3, -100)
                         buffered_frames = []
                
@@ -92,3 +92,4 @@ while True:
     finally:
         cap.release()
         cv2.destroyAllWindows()
+    time.sleep(5)
