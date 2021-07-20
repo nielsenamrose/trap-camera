@@ -4,21 +4,34 @@ import os
 import ntpath
 import time
 
-code = None
-
-while(True):
-    files = glob.glob("./video/*full.avi")
-    if len(files) > 0:
-        session = ftplib.FTP('192.168.1.1', 'admin', 'admin')
+def transfer_file(file):
+    session = ftplib.FTP('192.168.1.1','admin','admin')
+    try:
         session.cwd('volume(sda1)')
         session.cwd('trapcam')
-        for filename in files:
-            file = open(filename, 'rb')                  # file to send
-            code = session.storbinary('STOR {}'.format(
-                ntpath.basename(filename)), file)     # send the file
-            print(code)
-            file.close()
-            if code.find('226') > -1:
-                os.remove(filename)              # close file and FTP
+        return session.storbinary('STOR {0}'.format(ntpath.basename(file.name)), file).startswith('226')
+    except:
+        return False
+    finally:
         session.quit()
-    time.sleep(5)
+
+def open_and_transfer_file(filename):
+    file = open(filename,'rb')
+    try:
+        return transfer_file(file)
+    except:
+        return False;
+    finally:
+        file.close()
+                      
+while(True):
+    try:
+        files = glob.glob("/tmp/trapcam/*.avi")
+        for filename in files:
+            if filename.find("part") == -1:
+                if open_and_transfer_file(filename):
+                    print("File transferred:", filename)
+                    os.remove(filename)
+        time.sleep(5)
+    except Exception as ex:
+        print("Error:", ex)
