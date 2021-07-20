@@ -1,9 +1,9 @@
 import glob
 import cv2
-import numpy as np
 from datetime import datetime
 import time
 import os
+import sys
 
 def rename_part_files():
     files = glob.glob("/tmp/trapcam/*part.avi")
@@ -53,7 +53,7 @@ def capture(cap):
                 blur = make_blur(frame)
                 now = datetime.now()
                 imprint_datetime(now, frame)
-                cv2.imshow('capture', frame)
+                #cv2.imshow('capture', frame)
                 
                 if not reference_blur is None:
                     moment = calculate_moment(reference_blur, blur)
@@ -82,14 +82,18 @@ def capture(cap):
         if started:
             out.release()
 
-while True:
+def start():
     rename_part_files()
     cap = cv2.VideoCapture(0)
     try:
         capture(cap)
-    except Exception as ex:
-        print("Error:", ex)
     finally:
         cap.release()
-        cv2.destroyAllWindows()
+
+while True:
+    try:
+        start()
+    except:
+        print("Error:", sys.exc_info()[0])
+        #cv2.destroyAllWindows()
     time.sleep(5)
