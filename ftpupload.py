@@ -4,8 +4,9 @@ import os
 import ntpath
 import time
 
+
 def transfer_file(file):
-    session = ftplib.FTP('192.168.1.1','admin','admin')
+    session = ftplib.FTP('192.168.1.1', 'admin', 'admin')
     try:
         session.cwd('volume(sda1)')
         session.cwd('trapcam')
@@ -15,18 +16,20 @@ def transfer_file(file):
     finally:
         session.quit()
 
+
 def open_and_transfer_file(filename):
-    file = open(filename,'rb')
+    file = open(filename, 'rb')
     try:
         return transfer_file(file)
     except:
-        return False;
+        return False
     finally:
         file.close()
-                      
+
+
 while(True):
     try:
-        files = glob.glob("/tmp/*.avi")
+        files = glob.glob("*.avi")
         for filename in files:
             if filename.find("part") == -1:
                 if open_and_transfer_file(filename):
