@@ -27,7 +27,7 @@ def start_recording(now, buffered_frames):
     filename = '/tmp/trapcam/{0}part.avi'.format(now.strftime("%Y-%m-%d_%H-%M-%S"))
     print('start recording video file:', filename)
     fourcc = cv2.VideoWriter_fourcc(*'XVID')
-    out = cv2.VideoWriter(filename, fourcc, 20.0, (640,  480))
+    out = cv2.VideoWriter(filename, fourcc, 10.0, (640,  480))
     for f in buffered_frames:
         out.write(f)
     return out
