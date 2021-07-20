@@ -6,7 +6,7 @@ import os
 import sys
 
 def rename_part_files():
-    files = glob.glob("/tmp/trapcam/*part.avi")
+    files = glob.glob("/tmp/*part.avi")
     for filename in files:
         os.rename(filename, filename.replace("part.avi", ".avi"))
 
@@ -24,7 +24,7 @@ def calculate_moment(reference_blur, blur):
     return cv2.moments(dilate)['m00']
 
 def start_recording(now, buffered_frames):
-    filename = '/tmp/trapcam/{0}part.avi'.format(now.strftime("%Y-%m-%d_%H-%M-%S"))
+    filename = '/tmp/{0}part.avi'.format(now.strftime("%Y-%m-%d_%H-%M-%S"))
     print('start recording video file:', filename)
     fourcc = cv2.VideoWriter_fourcc(*'XVID')
     out = cv2.VideoWriter(filename, fourcc, 10.0, (640,  480))
