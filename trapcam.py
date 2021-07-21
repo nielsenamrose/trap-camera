@@ -82,6 +82,7 @@ def capture(cap):
                     if d >= 50:
                         proved = True
                 else:
+                    d = max(d - 3, -100)
                     if d <= -50 and started:
                         stop_recording(out, proved)
                         started = False
