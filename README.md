@@ -1,5 +1,11 @@
 # Learning project 2: Trap camera
 
+## The development environment
+
+To install OpenCV using conda: `conda install -c conda-forge opencv`
+
+To reset camera: `sudo modprobe -r uvcvideo && sudo modprobe uvcvideo`
+
 ## Setting up the BeagleBone Green
 
 I have a couple of BeagleBone Greens that I bought for another project. So that is what I will be using. Another single board computer like the Raspberry PI will probably work fine too.
