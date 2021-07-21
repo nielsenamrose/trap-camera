@@ -50,7 +50,7 @@ def stop_recording(out, proved):
     if proved:
         rename_part_files()
     else:
-        remove_part_files(out)
+        remove_part_files()
 
 
 def capture(cap):
