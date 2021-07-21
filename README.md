@@ -2,11 +2,9 @@
 
 ## Setting up the BeagleBone Green
 
-I have a couple of BeagleBone Greens that I bought for another project. So that is what I will be using.
+I have a couple of BeagleBone Greens that I bought for another project. So that is what I will be using. Another single board computer like the Raspberry PI will probably work fine too.
 
-1. Connect BBG to PC via USB
-
-1. SSH to BBG as debian@192.168.7.2 default password is *temppwd*
+First connect BBG to PC via USB. SSH to BBG as debian@192.168.7.2 default password is *temppwd*.
 
 ### Install OpenCV
 
