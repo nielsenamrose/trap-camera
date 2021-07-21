@@ -29,8 +29,8 @@ def calculate_moment(frame, reference):
     return blur, cv2.moments(dilate)['m00']
 
 
-def imprint_datetime(now, frame):
-    str = "{}".format(now)
+def imprint_datetime(now, d, moment, frame):
+    str = "{0} {1} {2}".format(now, moment, d)
     font = cv2.FONT_HERSHEY_SIMPLEX
     color = (255, 255, 255)
     cv2.putText(frame, str, (0, 470), font, 0.5, color, 1, cv2.LINE_AA)
@@ -70,7 +70,7 @@ def capture(cap):
                 now = datetime.now()
 
                 reference, moment = calculate_moment(frame, reference)
-                imprint_datetime(now, frame)
+                imprint_datetime(now, d, moment, frame)
                 print("{0} {1}".format(d, moment))
 
                 if moment > 50000:
@@ -79,11 +79,11 @@ def capture(cap):
                         out = start_recording(now, 8)
                         started = True
                         proved = False
-                    if d >= 50:
+                    if d == 100:
                         proved = True
                 else:
-                    d = max(d - 3, -100)
-                    if d <= -50 and started:
+                    d = max(d - 3, 0)
+                    if d == 0 and started:
                         stop_recording(out, proved)
                         started = False
 
