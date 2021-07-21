@@ -1,5 +1,6 @@
 import glob
 import cv2
+import numpy as np
 from datetime import datetime
 import time
 import os
@@ -24,13 +25,14 @@ def calculate_moment(frame, reference):
     if reference is None:
         return blur, 0
     diff = cv2.absdiff(reference, blur)
-    thresh = cv2.threshold(diff, 20, 255, cv2.THRESH_BINARY)[1]
-    dilate = cv2.dilate(thresh, None, 2)
+    thresh = cv2.threshold(diff, 15, 255, cv2.THRESH_BINARY)[1]
+    kernel = np.ones((5, 5), 'uint8')
+    dilate = cv2.dilate(thresh, kernel, 2)
     return blur, cv2.moments(dilate)['m00']
 
 
 def imprint_datetime(now, d, moment, frame):
-    str = "{0} {1} {2}".format(now, moment, d)
+    str = "{0} {1} {2}".format(now, d, moment)
     font = cv2.FONT_HERSHEY_SIMPLEX
     color = (255, 255, 255)
     cv2.putText(frame, str, (0, 470), font, 0.5, color, 1, cv2.LINE_AA)
