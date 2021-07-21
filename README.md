@@ -1,16 +1,5 @@
 # Learning project 2: Trap camera
 
-A new trap camera is only $99. The parts I will need to make my own will add up to a lot more than $99. So why?
-This is a learning project. The purpose is to get hands-on experience with a set of tools that I will like to be proficient in.
-
-- GIT and GitHub
-- Markdown
-- Python
-- Open CV
-- Linux
-
-
-
 ## Setting up the BeagleBone Green
 
 I have a couple of BeagleBone Greens that I bought for another project. So that is what I will be using.
@@ -47,6 +36,8 @@ $ sudo timedatectl set-timezone Australia/Brisbane
 ```
 
 ### Configure wireless
+
+coming...
 
 ### Clone the project from GitHub
 
