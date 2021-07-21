@@ -71,7 +71,7 @@ def capture(cap):
                     if d >= 50 and not started:
                         duration_secs = (now - start_time).seconds
                         out = start_recording(
-                            now, buffered_frames, number_of_frames/duration_secs)
+                            now, buffered_frames, 8)
                         started = True
                         start_time = now
                     elif not started:
