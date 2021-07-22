@@ -1,5 +1,7 @@
 # Learning project 2: Trap camera
 
+This camera is made from a web camera connected to a single board computer. The single board computer runs code that will upload video clips when it detects movement or a certain feature in the frame. 
+
 ## The development environment
 
 To install OpenCV using conda: `conda install -c conda-forge opencv`
