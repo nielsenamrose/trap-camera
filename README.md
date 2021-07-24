@@ -1,5 +1,7 @@
 # Learning project 2: Trap camera
 
+![Photo of the hardware](trap-camera.JPG)
+
 This camera is made from a web camera connected to a single board computer. The single board computer runs code that will upload video clips when it detects movement or a certain feature in the frame. 
 
 ## The development environment
