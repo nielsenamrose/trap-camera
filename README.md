@@ -54,7 +54,7 @@ Clone the repository
 $ git clone https://github.com/nielsenamrose/trap-camera.git
 ```
 
-### Start the program processes when the device starts
+### Run start.sh when the device starts
 
 Make start.sh executable
 ```
