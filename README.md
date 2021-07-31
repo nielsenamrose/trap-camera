@@ -54,6 +54,12 @@ Clone the repository
 $ git clone https://github.com/nielsenamrose/trap-camera.git
 ```
 
+### Make start.sh executable
+
+```
+$ chmod +x trap-camera/start.sh
+```
+
 ### Start the program processes when the device starts
 
 ```
