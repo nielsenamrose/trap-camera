@@ -12,7 +12,7 @@ To reset camera: `sudo modprobe -r uvcvideo && sudo modprobe uvcvideo`
 
 ## Setting up the BeagleBone Green
 
-I have a couple of BeagleBone Greens that I bought for another project. So that is what I will be using. Another single board computer like the Raspberry PI will probably work fine too.
+I have a couple of BeagleBone Greens that I bought for another project. So that is what I will be using. Another single board computer like the Raspberry PI will probably work fine too. There is some BB specific code in start.sh to turn off the blue leds on the BB, but that is it. The main program trapcam.py will run fine on a PC with a connected webcam.
 
 First connect BBG to PC via USB. SSH to BBG as debian@192.168.7.2 default password is *temppwd*.
 
