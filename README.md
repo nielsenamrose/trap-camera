@@ -49,11 +49,6 @@ coming...
 
 ### Clone the project from GitHub
 
-Configure Git
-```
-$ git config --global user.name "<name>" && git config --global user.email <email address> 
-```
-
 Clone the repository
 ```
 $ git clone https://github.com/nielsenamrose/trap-camera.git
