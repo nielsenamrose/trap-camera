@@ -5,6 +5,7 @@ from datetime import datetime
 import time
 import os
 import sys
+import configparser
 
 
 def rename_part_files():
@@ -56,11 +57,17 @@ def stop_recording(out, proved):
 
 
 def capture(cap):
+    config = configparser.ConfigParser()
+    config.read('trapcam.ini')
+    trapcam_config = config['trapcam']
     reference = None
     d = 0
     started = False
     proved = False
     out = None
+    start_time = None
+    frame_count = 0
+    frame_rate = float(trapcam_config.get('framerate', '4'))
     try:
         while(1):
             ok, frame = cap.read()
@@ -78,9 +85,11 @@ def capture(cap):
                 if moment > 50000:
                     d = min(d + 10, 100)
                     if not started:
-                        out = start_recording(now, 8)
+                        out = start_recording(now, frame_rate)
                         started = True
                         proved = False
+                        start_time = now
+                        frame_count = 0
                     if d == 100:
                         proved = True
                 else:
@@ -88,9 +97,14 @@ def capture(cap):
                     if d == 0 and started:
                         stop_recording(out, proved)
                         started = False
+                        frame_rate = frame_count / (now - start_time).seconds()
+                        trapcam_config['framerate'] = str(frame_rate)
+                        with open('trapcam.ini', 'w') as configfile:
+                            config.write(configfile)
 
                 if started:
                     out.write(frame)
+                    frame_count += 1
     finally:
         if started:
             stop_recording(out, proved)
