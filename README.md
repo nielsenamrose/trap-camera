@@ -63,6 +63,7 @@ $ sudo crontab -e
 Add the line
 ```
 @reboot cd /home/debian/trap-camera && ./start.sh &
+```
 
 ## The development environment
 
