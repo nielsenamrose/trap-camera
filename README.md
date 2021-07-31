@@ -4,12 +4,6 @@
 
 This camera is made from a web camera connected to a single board computer. The single board computer runs code that will upload video clips when it detects movement or a certain feature in the frame. 
 
-## The development environment
-
-To install OpenCV using conda: `conda install -c conda-forge opencv`
-
-To reset camera: `sudo modprobe -r uvcvideo && sudo modprobe uvcvideo`
-
 ## Setting up the BeagleBone Green
 
 I have a couple of BeagleBone Greens that I bought for another project. So that is what I will be using. Another single board computer like the Raspberry PI will probably work fine too. There is some BB specific code in start.sh to turn off the blue leds on the BB, but that is it. The main program trapcam.py will run fine on a PC with a connected webcam.
@@ -69,3 +63,11 @@ $ sudo crontab -e
 Add the line
 ```
 @reboot cd /home/debian/trap-camera && ./start.sh &
+
+## The development environment
+
+This section is by no means complete. There are many options for doing Python development. Here are just a few random notes I found useful when using Anaconda on Ubuntu.
+
+To install OpenCV using conda: `conda install -c conda-forge opencv`
+
+To reset camera: `sudo modprobe -r uvcvideo && sudo modprobe uvcvideo`
