@@ -97,7 +97,7 @@ def capture(cap):
                     if d == 0 and started:
                         stop_recording(out, proved)
                         started = False
-                        frame_rate = frame_count / (now - start_time).seconds()
+                        frame_rate = frame_count / (now - start_time).total_seconds()
                         trapcam_config['framerate'] = str(frame_rate)
                         with open('trapcam.ini', 'w') as configfile:
                             config.write(configfile)
