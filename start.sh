@@ -1,5 +1,5 @@
 #! /bin/sh
-python3 ftpupload.py &
+nice python3 ftpupload.py &
 python3 trapcam.py &
 
 sleep 2m
