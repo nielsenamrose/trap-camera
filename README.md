@@ -14,6 +14,7 @@ First connect BBG to PC via USB. SSH to BBG as debian@192.168.7.2 default passwo
 
 Install OpenCV for Python 3 using 
 ```
+$ sudo apt update
 $ sudo apt install python3-opencv
 ``` 
 (this will take a while)
