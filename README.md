@@ -1,4 +1,4 @@
-# Learning project 2: Trap camera
+# Trap camera
 
 ![Photo of the hardware](trap-camera.JPG)
 
