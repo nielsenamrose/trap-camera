@@ -32,7 +32,7 @@ def open_and_transfer_file(filename):
 
 while(True):
     try:
-        files = glob.glob("*.avi")
+        files = glob.glob("*.avi") + glob.glob("*.jpg")
         for filename in files:
             if filename.find("part") == -1:
                 if open_and_transfer_file(filename):

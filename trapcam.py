@@ -9,13 +9,13 @@ import configparser
 
 
 def rename_part_files():
-    files = glob.glob("*part.avi")
+    files = glob.glob("*part.avi*")
     for filename in files:
         os.rename(filename, filename.replace("part.avi", ".avi"))
 
 
 def remove_part_files():
-    files = glob.glob("*part.avi")
+    files = glob.glob("*part.avi*")
     for filename in files:
         os.remove(filename)
 
@@ -39,8 +39,7 @@ def imprint_datetime(now, d, moment, frame):
     cv2.putText(frame, str, (0, 470), font, 0.5, color, 1, cv2.LINE_AA)
 
 
-def start_recording(now, frame_rate):
-    filename = '{0}part.avi'.format(now.strftime("%Y-%m-%d_%H-%M-%S"))
+def start_recording(filename, frame_rate):
     print('start recording video file:', filename)
     fourcc = cv2.VideoWriter_fourcc(*'XVID')
     out = cv2.VideoWriter(filename, fourcc, frame_rate, (640,  480))
@@ -64,10 +63,14 @@ def capture(cap):
     d = 0
     started = False
     proved = False
+    filename = ''
     out = None
     start_time = None
     frame_count = 0
     frame_rate = float(trapcam_config.get('framerate', '4'))
+    min_moment = float(trapcam_config.get('minmoment', '50000'))
+    best_moment = 0
+    best_frame = None
     try:
         while(1):
             ok, frame = cap.read()
@@ -82,29 +85,39 @@ def capture(cap):
                 imprint_datetime(now, d, moment, frame)
                 print("{0} {1}".format(d, moment))
 
-                if moment > 50000:
+                if moment > min_moment:
                     d = min(d + 10, 100)
                     if not started:
-                        out = start_recording(now, frame_rate)
+                        filename = '{0}part.avi'.format(now.strftime("%Y-%m-%d_%H-%M-%S"))
+                        out = start_recording(filename, frame_rate)
                         started = True
                         proved = False
                         start_time = now
                         frame_count = 0
+                        best_moment = 0
                     if d == 100:
                         proved = True
                 else:
                     d = max(d - 3, 0)
                     if d == 0 and started:
+                        if (proved):
+                            cv2.imwrite(filename + '.jpg', best_frame)
                         stop_recording(out, proved)
+                        
                         started = False
                         frame_rate = frame_count / (now - start_time).total_seconds()
                         trapcam_config['framerate'] = str(frame_rate)
                         with open('trapcam.ini', 'w') as configfile:
                             config.write(configfile)
 
+                if (moment > best_moment):
+                    best_moment = moment
+                    best_frame = frame
+
                 if started:
                     out.write(frame)
                     frame_count += 1
+                    
     finally:
         if started:
             stop_recording(out, proved)
