@@ -10,12 +10,26 @@ I have a couple of BeagleBone Greens that I bought for another project. So that 
 
 First connect BBG to PC via USB. SSH to BBG as debian@192.168.7.2 default password is *temppwd*.
 
+### Configure wireless
+
+```
+$ sudo connmanctl
+connmanctl> enable wifi
+connmanctl> scan wifi
+connmanctl> services
+connmanctl> agent on
+connmanctl> connect wifi_884aea627540_4e69656c73656e34_managed_psk
+connmanctl> services
+```
+Confirm there is a *AO or *AR next to the Nexwork ID
+
+Reference: https://www.fis.gatech.edu/how-to-configure-bbw-wifi/
+
 ### Install OpenCV
 
 Install OpenCV for Python 3 using 
 ```
-$ sudo apt update
-$ sudo apt install python3-opencv
+$ sudo apt update && sudo apt install python3-opencv
 ``` 
 (this will take a while)
 
@@ -38,9 +52,7 @@ Set timezone
 $ sudo timedatectl set-timezone Australia/Brisbane
 ```
 
-### Configure wireless
 
-coming...
 
 ### Clone the project from GitHub
 
